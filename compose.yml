@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./
+      args:
+        - BASE_IMAGE=python:3.11.4-slim-bullseye
+        - UID=${HOST_UID}
+        - GID=${HOST_GID}
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app/src
+    ports:
+      - 8080:8000
+    environment:
+      - PYTHONPATH=/app/src/
+    restart: always
+    stdin_open: true
+    tty: true
