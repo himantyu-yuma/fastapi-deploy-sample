@@ -1,6 +1,8 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
 
+from chat import completion
 from database import Database
 
 app = FastAPI()
@@ -72,3 +74,12 @@ async def websocket_endpoint(websocket: WebSocket):
     while True:
         data = await websocket.receive_text()
         await websocket.send_text(f"Message text was: {data}")
+
+
+class CreateChatRequest(BaseModel):
+    prompt: str
+
+
+@app.post("/api/chat")
+def create_chat(req: CreateChatRequest):
+    return completion(req.prompt)
