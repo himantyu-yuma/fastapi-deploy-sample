@@ -37,9 +37,11 @@ html = """
 </html>
 """
 
+
 @app.get("/wssample")
 async def get():
     return HTMLResponse(html)
+
 
 @app.get("/api/ping")
 def read_root():
