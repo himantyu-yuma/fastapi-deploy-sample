@@ -1,10 +1,16 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
 
 from database import Database
 
 app = FastAPI()
-db = Database("test", "sample")
+db = Database("Items", "")
+
+
+class CreateItemRequest(BaseModel):
+    name: str
+
 
 html = """
 <!DOCTYPE html>
@@ -21,7 +27,7 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var ws = new WebSocket("ws://localhost:8080/ws");
+            var ws = new WebSocket("ws://fastapisample-1-b3690512.deta.app/ws");
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
@@ -55,15 +61,22 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/api/items/{item_id}")
-def read_item(item_id: str, q: str = None):
-    item = db.find({"item_id": item_id})
+@app.get("/api/items/{item_name}")
+def read_item(item_name: str, q: str = None):
+    item = db.find({"name": item_name})[0]
     return item
 
 
+@app.get("/api/items")
+def read_all_items():
+    items = db.find({})
+    return {"data": items}
+
+
 @app.post("/api/items")
-def update_items(req: str):
-    return db.insert_one(req)
+def update_items(req: CreateItemRequest):
+    print(req)
+    return db.insert_one({"name": req.name})
 
 
 @app.websocket("/ws")
