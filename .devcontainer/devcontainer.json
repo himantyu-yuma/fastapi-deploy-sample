@@ -1,7 +1,7 @@
 {
   "name": "Python Poetry DevContainer",
   "dockerComposeFile": [
-    "../docker/compose.yml"
+    "../compose.yml"
   ],
   "service": "app",
   "customizations": {

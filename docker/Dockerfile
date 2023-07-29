@@ -25,5 +25,6 @@ RUN groupadd -g ${GID} ${GROUP_NAME} \
 USER ${USER_NAME}
 WORKDIR ${APPLICATION_DIRECTORY}
 
-# COPY --chown=${UID}:${GID} pyproject.toml poetry.lock poetry.toml ./
-# CMD [ "bash" ]
+COPY --chown=${UID}:${GID} ./pyproject.toml ./poetry.lock ./
+RUN poetry install --no-root
+# CMD [ "poetry" ]
