@@ -9,7 +9,7 @@ services:
         - GID=${HOST_GID}
     volumes:
       - type: bind
-        source: ./app
+        source: ./
         target: /app/src
     ports:
       - 8080:8000

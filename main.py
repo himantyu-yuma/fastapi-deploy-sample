@@ -1,7 +1,10 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
+from database import Database
+
 app = FastAPI()
+db = Database("test", "sample")
 
 html = """
 <!DOCTYPE html>
@@ -40,6 +43,10 @@ html = """
 
 @app.get("/wssample")
 async def get():
+    """
+    Args
+        test str: テスト
+    """
     return HTMLResponse(html)
 
 
@@ -49,8 +56,14 @@ def read_root():
 
 
 @app.get("/api/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+def read_item(item_id: str, q: str = None):
+    item = db.find({"item_id": item_id})
+    return item
+
+
+@app.post("/api/items")
+def update_items(req: str):
+    return db.insert_one(req)
 
 
 @app.websocket("/ws")
