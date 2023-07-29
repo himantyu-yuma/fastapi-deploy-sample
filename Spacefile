@@ -9,3 +9,8 @@ micros:
     public_routes:
       - "/api/*"
       - "/ws"
+    presets:
+      env:
+        - name: OPENAI_API_KEY
+          description: Secret key of openai api
+          default: "xxx"
