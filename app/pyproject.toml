@@ -10,6 +10,7 @@ packages = [{include = "fastapi_deploy_sample"}]
 python = "^3.11"
 fastapi = "^0.100.1"
 uvicorn = {extras = ["standard"], version = "^0.23.1"}
+websockets = "^11.0.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
