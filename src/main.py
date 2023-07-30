@@ -52,12 +52,6 @@ async def get():
     return HTMLResponse(html)
 
 
-@app.get("/api/items/{item_id}")
-def read_item(item_id: str, q: str = None):
-    item = db.find({"item_id": item_id})
-    return item
-
-
 @app.post("/api/items")
 def update_items(req: str):
     return db.insert_one(req)
