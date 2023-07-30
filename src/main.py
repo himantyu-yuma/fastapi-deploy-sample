@@ -1,8 +1,6 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
-from src.db.database import db
-
 from . import api
 
 app = FastAPI()
@@ -50,11 +48,6 @@ async def get():
         test str: テスト
     """
     return HTMLResponse(html)
-
-
-@app.post("/api/items")
-def update_items(req: str):
-    return db.insert_one(req)
 
 
 @app.websocket("/ws")
