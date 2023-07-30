@@ -1,7 +1,7 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
-from db.database import db
+from src.db.database import db
 
 from . import api
 
