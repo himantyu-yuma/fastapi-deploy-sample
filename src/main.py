@@ -1,14 +1,12 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 
-from db.database import Database
+from db.database import db
 
 from . import api
 
 app = FastAPI()
 app.include_router(api.api_router, prefix="/api")
-
-db = Database("test", "sample")
 
 html = """
 <!DOCTYPE html>

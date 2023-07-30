@@ -18,3 +18,6 @@ class Database:
 
     def __del__(self):
         self.close()
+
+
+db = Database("test", "sample")
