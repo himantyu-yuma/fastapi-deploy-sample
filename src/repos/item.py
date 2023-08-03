@@ -1,26 +1,18 @@
-# from dataclasses import dataclass
+from pydantic import BaseModel
 
-from src.db.database import db
-
-# @dataclass
-# class ItemType:
-#     name: str
-#     price: float
+from src.db.schemes.item import db_item
 
 
-class Item:
-    def __init__(self, name: str, price: int, key: str):
-        self.key = key
-        self.name = name
-        self.price = int(price)
+class Item(BaseModel):
+    key: str = ""
+    name: str
+    price: int
 
     def Find(id: str):
-        db_item = db.find(table_name="item", id=id)
-        item = Item(**db_item)
-        return item
+        item = db_item.find(id=id)
+        result = Item(**item)
+        return result
 
-    def Save():
-        result = db.insert_one(
-            table_name="item", data={"name": "トリケラトプス", "price": "9980"}
-        )
+    def Save(req: dict):
+        result = db_item.insert_one(data=req)
         return result

@@ -11,29 +11,17 @@ DETA_KEY = os.getenv("DETA_PRODUCT_KEY")
 class Database:
     """databaseを隠蔽したい"""
 
-    def __init__(self, db_name):
+    def __init__(self, Scheme):
         deta = Deta(DETA_KEY)
+        class_name = Scheme.__class__.__name__
         self.deta = deta
-        self.base = deta.Base(db_name)
+        self.base = deta.Base(class_name)
 
-    def close():
-        pass
+    def insert_one(self, data: dict):
+        return self.base.put(data)
 
-    def insert_one(self, table_name, data):
-        if table_name == "item":
-            return self.base.put({"name": "トリケラトプス", "price": "9980"})
-        return data
+    def insert_many(self, data: list[dict]):
+        return self.base.put(data)
 
-    def insert_many(self, data):
-        pass
-
-    def find(self, table_name, id):
-        if table_name == "item":
-            return self.base.get(id)
-        return {"id": id}
-
-    def __del__(self):
-        self.close()
-
-
-db = Database("test")
+    def find(self, id):
+        return self.base.get(id)
