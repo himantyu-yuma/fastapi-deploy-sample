@@ -27,8 +27,10 @@ class Database:
     def insert_many(self, data):
         pass
 
-    def find(self, query):
-        return {"query": query}
+    def find(self, table_name, id):
+        if table_name == "item":
+            return self.base.get(id)
+        return {"id": id}
 
     def __del__(self):
         self.close()

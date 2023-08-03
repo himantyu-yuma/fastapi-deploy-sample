@@ -14,6 +14,11 @@ class Item:
         self.name = name
         self.price = int(price)
 
+    def Find(id: str):
+        db_item = db.find(table_name="item", id=id)
+        item = Item(**db_item)
+        return item
+
     def Save():
         result = db.insert_one(
             table_name="item", data={"name": "トリケラトプス", "price": "9980"}
