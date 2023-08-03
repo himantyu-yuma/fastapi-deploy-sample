@@ -32,6 +32,10 @@ class Database:
         res = self.base.fetch(query)
         return res.items
 
+    def delete(self, key):
+        self.base.delete(key)
+        return "success"
+
 
 if __name__ == "__main__":
     db = Database("Items", "")

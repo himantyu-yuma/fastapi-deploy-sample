@@ -63,9 +63,14 @@ def read_root():
 
 
 @app.get("/api/items/{item_name}")
-def read_item(item_name: str, q: str = None):
+def read_item(item_name: str):
     item = db.find({"name": item_name})[0]
     return item
+
+
+@app.delete("/api/items/{item_key}")
+def delete_item(item_key: str):
+    return db.delete(item_key)
 
 
 @app.get("/api/items")
