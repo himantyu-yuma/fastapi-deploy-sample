@@ -1,3 +1,4 @@
+deta
 fastapi
 uvicorn[standard]
 websockets

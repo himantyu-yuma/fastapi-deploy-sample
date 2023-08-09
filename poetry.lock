@@ -101,6 +101,20 @@ files = [
 ]
 
 [[package]]
+name = "deta"
+version = "1.2.0"
+description = "Python SDK for Deta Base & Deta Drive."
+optional = false
+python-versions = "*"
+files = [
+    {file = "deta-1.2.0-py3-none-any.whl", hash = "sha256:f1592b8e1809c6d284754521c8bddc236736ed50df8cfecdde3ad4e86fdd8860"},
+    {file = "deta-1.2.0.tar.gz", hash = "sha256:2573504fc07f05e1118175221ebe2bbfb822b9903f8f268bf851613a5b279557"},
+]
+
+[package.extras]
+async = ["aiohttp (>=3,<4)"]
+
+[[package]]
 name = "fastapi"
 version = "0.100.1"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
@@ -767,4 +781,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a786476be57e3b78e0fa341c57164ed5bb7a36f26608e928a97ae7e80b7763f6"
+content-hash = "38851fc1af56fce8ad955ec8ee9f0e1a2c2b2088fb548b10e89f8f8fad6471af"
